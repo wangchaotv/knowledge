@@ -4,6 +4,62 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Knowledge</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css"
+    />
+    <script src="./data.js"></script>
+    <style>
+      body {
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+      .names {
+        box-sizing: border-box;
+        height: 20vh;
+        overflow-y: auto;
+        border: 1px dashed #eee;
+      }
+      .markdown-body {
+        padding: 20px;
+        box-sizing: border-box;
+        height: 80vh;
+        overflow-y: auto;
+      }
+      .name-btn {
+        display: inline-block;
+        font-size: 12px;
+        cursor: pointer;
+        padding: 5px 8px;
+        margin: 5px;
+        border: 1px solid #ddd;
+      }
+    </style>
+    <script>
+      const { names, markdown } = data;
+
+      document.addEventListener('DOMContentLoaded', function () {
+        let nameString = '';
+        names.forEach((list) => {
+          nameString += '<div>';
+          list.forEach((name) => {
+            nameString += `<span class="name-btn">${name}</span>`;
+          });
+          nameString += '</div>';
+        });
+        document.querySelector('.names').innerHTML = nameString;
+
+        document.querySelector('body').addEventListener('click', function () {
+          if (event.target.className === 'name-btn') {
+            const text = markdown[event.target.innerHTML];
+            document.querySelector('.markdown-body').innerHTML = text;
+          }
+        });
+      });
+    </script>
   </head>
-  <body>Knowledge</body>
+  <body>
+    <div class="names"></div>
+    <div class="markdown-body"></div>
+  </body>
 </html>

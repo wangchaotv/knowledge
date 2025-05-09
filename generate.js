@@ -39,7 +39,7 @@ const main = async (question) => {
 const generate = async () => {
   const data = {
     names,
-    markdwon: {},
+    markdown: {},
   };
   for (const name of names) {
     for (const n of name) {
@@ -48,7 +48,7 @@ const generate = async () => {
         let str = fse.readFileSync(filepath, { encoding: 'utf-8' });
         const md = new MarkdownIt();
         const result = md.render(str);
-        data.markdwon[n] = result;
+        data.markdown[n] = result;
       }
     }
   }
